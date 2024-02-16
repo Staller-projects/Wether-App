@@ -51,6 +51,7 @@ const fetchWetherData = async (cityName = "pune") => {
     .then(response => response.json())
     .catch(error => alert(error))
 
+
     console.log(wetherData);  
 
     return wetherData;
@@ -95,6 +96,8 @@ const getCustomCityWether = (e) => {
 
   if(e.key == REQUIRED_KEY) { 
 
+    tempElement.innerText = ""
+    currentCity.innerText = ""
     document.getElementById("loading").classList.toggle("hidden");
     
     let cityName = String(getCustomCityElement.value);
@@ -104,31 +107,28 @@ const getCustomCityWether = (e) => {
     .then(() => document.getElementById("loading").classList.toggle("hidden"))
     .catch(error => console.log(error))
     
-    // setTimeout(() => {
-    // }, )
-
-
-
-    // document.getElementById("loading").classList.toggle("hidden")
   }
   
 } 
 
 
-getCustomCityElement.addEventListener("keydown", getCustomCityWether);
 
 
 
 
-(function() {
+// Scripts entry point is from here
+(() => {
   document.getElementById("loading").classList.toggle("hidden")
   fetchWetherData()
   .then(response => displayWetherData(response))
   .then(() => document.getElementById("loading").classList.toggle("hidden"))
   .catch(error => console.log(error))
 
- 
+  getCustomCityElement.addEventListener("keydown", getCustomCityWether);
+
 })()
+
+
 
 
 
